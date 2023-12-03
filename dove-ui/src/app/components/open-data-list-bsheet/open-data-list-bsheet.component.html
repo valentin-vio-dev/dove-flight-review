@@ -1,0 +1,15 @@
+<mat-nav-list>
+    <mat-list-item (click)="fileosd.click()" *ngIf="!data.osd">
+        <mat-icon matListItemIcon>file_open</mat-icon>
+        <div matListItemTitle>Open OSD File</div>
+        <div matListItemLine>Opens a .csv file containing the required data to show.</div>
+    </mat-list-item>
+    <mat-list-item (click)="filevid.click()" *ngIf="!data.video">
+        <mat-icon matListItemIcon>video_library</mat-icon>
+        <div matListItemTitle>Open Video File</div>
+        <div matListItemLine>Opens a .mp4 file to watch it along the GPS data.</div>
+    </mat-list-item>
+</mat-nav-list>
+
+<input #fileosd type="file" accept=".osd" hidden (change)="onFileOsd($event)"/>
+<input #filevid type="file" accept=".mp4" hidden (change)="onFileVid($event)"/>

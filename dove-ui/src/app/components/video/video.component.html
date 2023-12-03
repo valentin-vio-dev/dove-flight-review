@@ -1,0 +1,11 @@
+<div class="video-container" #videoContainer>
+    <video #video>
+        <source #videoSource type="video/mp4" />
+    </video>
+    <app-warning-text *ngIf="!videoSource.src"
+        style="position: absolute;" 
+        icon="warning_amber" 
+        title="No video found!"
+        subtitle="Add video to watch it along the GPS data.">
+    </app-warning-text>
+</div>

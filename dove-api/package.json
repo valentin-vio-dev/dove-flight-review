@@ -1,0 +1,33 @@
+{
+  "name": "osd_file_extractor",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start:prod": "npm run build && node dist/index.js",
+    "start:dev": "nodemon src/index.ts",
+    "build": "tsc -p ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/connect-busboy": "^1.0.3",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/fs-extra": "^11.0.4",
+    "@types/node": "^20.10.0",
+    "@types/uuid": "^9.0.7",
+    "nodemon": "^3.0.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.3.2"
+  },
+  "dependencies": {
+    "connect-busboy": "^1.0.0",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "ffmpeg-extract-frames": "^2.0.2",
+    "fs-extra": "^11.2.0",
+    "uuid": "^9.0.1"
+  }
+}

@@ -1,0 +1,24 @@
+<div class="canvas-container" #canvasContainer>
+    <canvas #canvas></canvas>
+    <app-warning-text *ngIf="!osdData"
+        style="position: absolute;" 
+        icon="warning_amber" 
+        title="No OSD data found!"
+        subtitle="Add a .csv file containing the required data to show.">
+    </app-warning-text>
+</div>
+
+<div class="action-elements" *ngIf="osdData">
+    <div class="element">
+        <mat-icon>rotate_right</mat-icon>
+        Rotate: Left mouse button
+    </div>
+    <div class="element">
+        <mat-icon>zoom_in</mat-icon>
+        Zoom: Middle mouse button
+    </div>
+    <div class="element">
+        <mat-icon>pan_tool</mat-icon>
+        Pan: right mouse button
+    </div>
+</div>

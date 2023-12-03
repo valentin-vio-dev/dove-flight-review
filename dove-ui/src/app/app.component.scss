@@ -1,0 +1,83 @@
+.top-bar {
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+}
+
+.content {
+    height: 100vh;
+    padding: 64px 0px;
+
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 50%;
+    grid-template-areas: 
+        "ddd-player map"
+        "raw-data video";
+
+    .map {
+        grid-area: map;
+    }
+
+    .video {
+        grid-area: video;
+    }
+
+    .ddd-player {
+        grid-area: ddd-player;
+    }
+
+    .raw-data {
+        grid-area: raw-data;
+        position: relative;
+    }
+
+    .view {
+        border: 2px solid #000000;
+    }
+}
+
+.slider-bar {
+    position: fixed;
+    bottom: 0;
+    gap: 16px;
+    z-index: 1000;
+
+    .time-text {
+        font-size: 14px;
+    }
+
+    mat-slider {
+        width: 100%;
+    }
+}
+
+.tile-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .card-title {
+        display: block;
+        margin-bottom: 8px;
+    }
+
+    mat-card-content {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+.upload-button {
+    position: fixed;
+    bottom: 80px;
+    right: 16px;
+    z-index: 1000;
+}
+
+.playback-speed-text {
+    font-size: 14px;
+    font-weight: bold;
+}

@@ -1,0 +1,13 @@
+<div class="list">
+    <div class="row" *ngFor="let data of getFrameDataAsArray()">
+        <div class="key">{{ data[0] }}</div>
+        <div class="value">{{ data[1] }}</div>
+    </div>
+</div>
+
+<app-warning-text *ngIf="!osdData"
+    style="position: absolute;" 
+    icon="warning_amber" 
+    title="No OSD data found!"
+    subtitle="Add a .csv file containing the required data to show.">
+</app-warning-text>

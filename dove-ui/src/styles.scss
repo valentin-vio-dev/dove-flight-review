@@ -1,0 +1,19 @@
+@import 'theme.scss';
+
+$color-primary: mat-palette($primary, 500);
+$color-accent: mat-palette($accent, 500);
+$color-accent-dark: mat-palette($accent, 700);
+
+html, body { 
+  height: 100%;
+}
+
+body { 
+  margin: 0; 
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: mat-color($color-accent-dark);
+}
+
+mat-toolbar-row, .mdc-button {
+  font-weight: normal;
+}

@@ -1,0 +1,26 @@
+@import '../../../styles.scss';
+
+.list {
+    padding: 32px;
+
+    .row {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 2px 0px;
+    
+        .key {
+            color: #FFFFFF;
+            width: 50%;
+        }
+    
+        .value {
+            width: 50%;
+            color: mat-color($color-primary);
+        }
+    }
+}
+
+app-warning-text {
+    margin-top: -64px !important;
+}
