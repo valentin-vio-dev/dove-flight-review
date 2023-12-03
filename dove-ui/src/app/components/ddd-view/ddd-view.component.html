@@ -1,6 +1,6 @@
 <div class="canvas-container" #canvasContainer>
     <canvas #canvas></canvas>
-    <app-warning-text *ngIf="!osdData"
+    <app-warning-text *ngIf="!osdFrames"
         style="position: absolute;" 
         icon="warning_amber" 
         title="No OSD data found!"
@@ -8,7 +8,7 @@
     </app-warning-text>
 </div>
 
-<div class="action-elements" *ngIf="osdData">
+<div class="action-elements" *ngIf="osdFrames">
     <div class="element">
         <mat-icon>rotate_right</mat-icon>
         Rotate: Left mouse button

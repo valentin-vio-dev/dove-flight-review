@@ -18,10 +18,10 @@ export class OsdService {
             file.on('end', () => {
                 buffer = Buffer.concat(buffer);
                 const osdRecord = OsdRecord.parseOsdFileFromBuffer(buffer);
-                const osdData = osdRecord.getAllFrameData();
-                const stats = OsdRecord.createStats(osdData);
-                const fps = OsdRecord.calculateFps(osdData);
-                res.send(response({ osdData, stats, fps }))
+                const osdFrames = osdRecord.getAllFrameData();
+                const stats = OsdRecord.createStats(osdFrames);
+                const fps = OsdRecord.calculateFps(osdFrames);
+                res.send(response({ osdFrames, stats, fps }))
             });
         });
     }

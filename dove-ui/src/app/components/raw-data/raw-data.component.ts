@@ -7,7 +7,7 @@ import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core
   styleUrls: ['./raw-data.component.scss']
 })
 export class RawDataComponent implements OnInit {
-  @Input() osdData: any[];
+  @Input() osdFrames: any[];
   @Input() sliderPosition: number;
 
   ngOnInit(): void {
@@ -15,12 +15,12 @@ export class RawDataComponent implements OnInit {
   }
 
   getFrameDataAsArray() {
-    if (!this.osdData) {
+    if (!this.osdFrames) {
       return [];
     }
     
     const fixedDecimalsElement = ['x', 'y', 'z'];
-    const data = { ...this.osdData[this.sliderPosition] };
+    const data = { ...this.osdFrames[this.sliderPosition] };
     let arrayData = Object.keys(data).map((key: string) => [key, data[key]]);
     arrayData = arrayData.sort((a, b) => a[0].localeCompare(b[0]));
     arrayData = arrayData.map(d => 

@@ -11,7 +11,7 @@ export class VideoComponent implements OnInit, OnChanges, AfterViewInit {
   @ViewChild('video') video: ElementRef;
   @ViewChild('videoContainer') videoContainer: ElementRef;
   
-  @Input() osdData: any[];
+  @Input() osdFrames: any[];
   @Input() videoFileName: string;
   @Input() sliderPosition: number;
 
@@ -38,7 +38,7 @@ export class VideoComponent implements OnInit, OnChanges, AfterViewInit {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['sliderPosition'] && !changes['sliderPosition'].firstChange) {
-      this.video.nativeElement.currentTime = this.millisToSeconds(this.osdData[this.sliderPosition]['osd_millis']); // -1 or not?
+      this.video.nativeElement.currentTime = this.millisToSeconds(this.osdFrames[this.sliderPosition]['osd_millis']); // -1 or not?
     }
 
     if (changes['videoFileName'] && !changes['videoFileName'].firstChange) {

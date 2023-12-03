@@ -1,7 +1,7 @@
 <mat-toolbar color="accent" class="top-bar mat-elevation-z4">
   <mat-toolbar-row style="display: flex; justify-content: space-between; align-items: center;">
     <span>Dove 🕊️ <small>({{ version }})</small></span>
-    <button mat-flat-button color="primary" [disabled]="!osdData" (click)="downloadOsdAsCsv()" *ngIf="osdData">
+    <button mat-flat-button color="primary" [disabled]="!osdFrames" (click)="downloadOsdAsCsv()" *ngIf="osdFrames">
       <mat-icon>download</mat-icon>
       <span>Export OSD data</span>
     </button>
@@ -11,16 +11,16 @@
 
 <div class="content">
   <div class="map view">
-    <app-map [osdData]="osdData" [osdStats]="osdStats" [sliderPosition]="sliderPosition"></app-map>
+    <app-map [osdFrames]="osdFrames" [osdStats]="osdStats" [sliderPosition]="sliderPosition"></app-map>
   </div>
   <div class="video view">
-    <app-video [osdData]="osdData" [sliderPosition]="sliderPosition" [videoFileName]="videoFileName"></app-video>
+    <app-video [osdFrames]="osdFrames" [sliderPosition]="sliderPosition" [videoFileName]="videoFileName"></app-video>
   </div>
   <div class="ddd-player view">
-    <app-ddd-view [osdData]="osdData" [osdStats]="osdStats" [sliderPosition]="sliderPosition"></app-ddd-view>
+    <app-ddd-view [osdFrames]="osdFrames" [osdStats]="osdStats" [sliderPosition]="sliderPosition"></app-ddd-view>
   </div>
   <div class="raw-data view">
-    <app-raw-data [osdData]="osdData" [sliderPosition]="sliderPosition"></app-raw-data>
+    <app-raw-data [osdFrames]="osdFrames" [sliderPosition]="sliderPosition"></app-raw-data>
   </div>
 </div>
 
@@ -29,7 +29,7 @@
     <mat-icon>{{ recordPlaying ? 'pause' : 'play_arrow' }}</mat-icon>
   </button>
   <span class="time-text">{{ getCurrentTime() }}</span>
-  <mat-slider min="0" [max]="osdData ? osdData.length - 1 : 0" step="1">
+  <mat-slider min="0" [max]="osdFrames ? osdFrames.length - 1 : 0" step="1">
     <input matSliderThumb [(ngModel)]="sliderPosition">
   </mat-slider>
   <span class="time-text">{{ endText }}</span>
@@ -43,13 +43,13 @@
   </mat-menu>
 </mat-toolbar>
 
-<button mat-fab [extended]="!loading" color="primary" class="upload-button" (click)="openUploadSheet()" *ngIf="!(osdData && videoFileName)">
+<button mat-fab [extended]="!loading" color="primary" class="upload-button" (click)="openUploadSheet()" *ngIf="!(osdFrames && videoFileName)">
   <mat-spinner color="accent" diameter="20" *ngIf="loading"></mat-spinner>
   <mat-icon *ngIf="!loading">add</mat-icon>
   <span *ngIf="!loading">Add data</span>
 </button>
 
-<button mat-fab extended color="accent" class="upload-button" (click)="reset()" *ngIf="osdData && videoFileName">
+<button mat-fab extended color="accent" class="upload-button" (click)="reset()" *ngIf="osdFrames && videoFileName">
   <mat-icon>refresh</mat-icon>
   Reset all
 </button>
