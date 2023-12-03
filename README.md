@@ -20,6 +20,7 @@ cd dove-api
 npm i
 npm run start:dev
 ```
+Finally open http://localhost:4200 in your browser.
 
 Currently Dove supports the following data types:
 - Altitude
