@@ -115,7 +115,6 @@ export class AppComponent implements OnInit {
 
       this.loading = false;
       this.snackBar.open('OSD file loaded!', '', { duration: 2000 });
-      console.log(this.osdData)
     }, (err: any) => {
       this.snackBar.open('Something went wrong!', '', { duration: 2000 });
       this.loading = false;
