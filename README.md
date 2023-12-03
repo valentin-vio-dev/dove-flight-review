@@ -23,12 +23,11 @@ npm run start:dev
 Finally open http://localhost:4200 in your browser.
 
 Currently Dove supports the following data types:
-- Altitude
+- Latitude, Longitude, Altitude **(These three are required in order to work with Dove)!**
 - Battery
 - Distance from home
-- Latitude, Longitude
 - LQ
-- RSSSI
+- RSSI
 - Satelites
 - Speed
 - Timer
