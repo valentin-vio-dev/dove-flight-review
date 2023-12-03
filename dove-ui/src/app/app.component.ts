@@ -12,14 +12,14 @@ import { saveAs } from 'file-saver';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  osdData: any;
+  osdData: any[];
+  osdStats: any;
   sliderPosition: number = 0;
   endText: string = '00:00:00';
   loading: boolean = false;
   recordPlaying: boolean = false;
   recordInterval: any;
   videoFileName: string;
-  videoLastModified: number;
 
   FPS: number;
   FPS_INTERVAL: number;
@@ -48,7 +48,7 @@ export class AppComponent implements OnInit {
         this.togglePlay();
       } else if (event.code === 'ArrowRight' && this.osdData) {
         event.preventDefault();
-        if (this.sliderPosition < this.osdData['data'].length - 1) {
+        if (this.sliderPosition < this.osdData.length - 1) {
           this.sliderPosition++;
         }
       } else if (event.code === 'ArrowLeft' && this.osdData) {
@@ -105,12 +105,13 @@ export class AppComponent implements OnInit {
     this.osdFilename = file.name.split('.')[0];
     this.loading = true;
     this.osdService.generateDataFromOSD(file).subscribe((res: any) => {
-      this.osdData = res;
+      this.osdData = res['data']['osdData'];
+      this.osdStats = res['data']['stats'];
 
-      this.FPS = res['fps'];
+      this.FPS = res['data']['fps'];
       this.FPS_INTERVAL = 1000 / this.FPS
 
-      const lastMillis = this.osdData['data'][this.osdData['data'].length - 1]['osd_millis'];
+      const lastMillis = this.osdData[this.osdData.length - 1]['osd_millis'];
       this.endText = this.millisToText(lastMillis);
 
       this.loading = false;
@@ -123,9 +124,8 @@ export class AppComponent implements OnInit {
 
   uploadVideoFile(file: File) {
     this.loading = true;
-    this.videoLastModified = file.lastModified;
     this.videoService.uploadVideo(file).subscribe((res: any) => {
-      this.videoFileName = res['filename'];
+      this.videoFileName = res['data']['filename'];
       this.loading = false;
       this.snackBar.open('Video file loaded!', '', { duration: 2000 });
     }, (err: any) => {
@@ -136,8 +136,8 @@ export class AppComponent implements OnInit {
 
   downloadOsdAsCsv() {
     this.loading = true;
-    const header = Object.keys(this.osdData['data'][0]).join(';');
-    const dataArray = this.osdData['data'].map(
+    const header = Object.keys(this.osdData[0]).join(';');
+    const dataArray = this.osdData.map(
       (element: any) => Object.values(element).map(
         (e: any) => e.
           toString().
@@ -169,7 +169,7 @@ export class AppComponent implements OnInit {
       return '00:00:00';
     }
 
-    return this.millisToText(this.osdData['data'][this.sliderPosition]['osd_millis']);
+    return this.millisToText(this.osdData[this.sliderPosition]['osd_millis']);
   }
 
   play() {
@@ -184,7 +184,7 @@ export class AppComponent implements OnInit {
 
     if (this.elapsed > this.FPS_INTERVAL) {
       this.then = this.now - (this.elapsed % this.FPS_INTERVAL);
-      if (this.sliderPosition < this.osdData['data'].length - 1) {
+      if (this.sliderPosition < this.osdData.length - 1) {
         this.sliderPosition += 1;
       } else {
         this.stop();

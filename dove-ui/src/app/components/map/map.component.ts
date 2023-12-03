@@ -8,7 +8,8 @@ import { MAX_LINES } from 'src/app/const/settings.const';
   styleUrls: ['./map.component.scss']
 })
 export class MapComponent implements OnInit, AfterViewInit, OnChanges  {
-  @Input() osdData: any;
+  @Input() osdData: any[];
+  @Input() osdStats: any;
   @Input() sliderPosition: number;
 
   map: L.Map;
@@ -68,9 +69,9 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges  {
 
   getCoordiante(index: number): L.LatLng {
     return new L.LatLng(
-      this.osdData['data'][index]['latitude'], 
-      this.osdData['data'][index]['longitude'], 
-      this.osdData['data'][index]['altitude']
+      this.osdData[index]['latitude'], 
+      this.osdData[index]['longitude'], 
+      this.osdData[index]['altitude']
     );
   }
 
@@ -96,8 +97,8 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges  {
     if (this.sliderPosition > 0) {
       let lineCount = 0;
       for (let i = 0; i <= this.sliderPosition - 1; i++) {
-        const speed = this.osdData['data'][this.sliderPosition - i]['speed'];
-        const speedPercentage = speed / this.osdData['stats']['speed']['max'];
+        const speed = this.osdData[this.sliderPosition - i]['speed'];
+        const speedPercentage = speed / this.osdStats['speed']['max'];
         const color = `hsl(${(1 - speedPercentage) * 120}, 100%, 50%)`;
         const line = new L.Polyline([this.getCoordiante(this.sliderPosition - i), this.getCoordiante(this.sliderPosition - i - 1)], { weight: 2, color })
         this.lines.push(line)

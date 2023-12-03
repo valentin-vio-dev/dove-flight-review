@@ -11,13 +11,13 @@
 
 <div class="content">
   <div class="map view">
-    <app-map [osdData]="osdData" [sliderPosition]="sliderPosition"></app-map>
+    <app-map [osdData]="osdData" [osdStats]="osdStats" [sliderPosition]="sliderPosition"></app-map>
   </div>
   <div class="video view">
     <app-video [osdData]="osdData" [sliderPosition]="sliderPosition" [videoFileName]="videoFileName"></app-video>
   </div>
   <div class="ddd-player view">
-    <app-ddd-view [osdData]="osdData" [sliderPosition]="sliderPosition" [videoLastModified]="videoLastModified"></app-ddd-view>
+    <app-ddd-view [osdData]="osdData" [osdStats]="osdStats" [sliderPosition]="sliderPosition"></app-ddd-view>
   </div>
   <div class="raw-data view">
     <app-raw-data [osdData]="osdData" [sliderPosition]="sliderPosition"></app-raw-data>
@@ -29,7 +29,7 @@
     <mat-icon>{{ recordPlaying ? 'pause' : 'play_arrow' }}</mat-icon>
   </button>
   <span class="time-text">{{ getCurrentTime() }}</span>
-  <mat-slider min="0" [max]="osdData ? osdData['data'].length - 1 : 0" step="1">
+  <mat-slider min="0" [max]="osdData ? osdData.length - 1 : 0" step="1">
     <input matSliderThumb [(ngModel)]="sliderPosition">
   </mat-slider>
   <span class="time-text">{{ endText }}</span>

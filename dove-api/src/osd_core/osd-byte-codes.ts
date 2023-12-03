@@ -1,4 +1,4 @@
-export const OsdStartingCodes: any = {
+const OSD_BYTE_CODES: any = {
     lq: {
         values: [123],
     },
@@ -31,3 +31,4 @@ export const OsdStartingCodes: any = {
         values: [31, 32]
     }
 };
+export default OSD_BYTE_CODES;

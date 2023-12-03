@@ -1,6 +1,6 @@
-import fs from 'fs';
-import { OsdStartingCodes } from "./codes.const";
+import fs from 'fs'
 import { Frame } from "./frame.class";
+import OSD_BYTE_CODES from './osd-byte-codes';
 
 export class OsdRecord {
     header: string;
@@ -224,7 +224,7 @@ export class OsdRecord {
 
     static createStats(data: any[]) {
         let stats: any = {};
-        Object.keys(OsdStartingCodes).forEach(key => {
+        Object.keys(OSD_BYTE_CODES).forEach(key => {
             stats[key] = this.getStat(data, key);
         });
         stats['x'] = this.getStat(data, 'x');

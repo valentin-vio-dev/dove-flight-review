@@ -1,8 +1,6 @@
 import fs from 'fs';
-import { OsdStartingCodes } from './codes.const';
-
-const EARTH_RADIUS = 6_371_000;
-const METER_IN_PIXEL = 0.89932;
+import { EARTH_RADIUS, METER_IN_PIXEL } from '../settings/settings.const';
+import OSD_BYTE_CODES from './osd-byte-codes';
 
 export class Frame {
     index: number;
@@ -64,13 +62,13 @@ export class Frame {
 
     getAllData(format: boolean = true) {
         const result: any = {};
-        Object.keys(OsdStartingCodes).forEach((key: string) => {
+        Object.keys(OSD_BYTE_CODES).forEach((key: string) => {
             let data: any = null;
-            for (let i = 0; i < OsdStartingCodes[key].values.length; i++) {
+            for (let i = 0; i < OSD_BYTE_CODES[key].values.length; i++) {
                 data ||= this.extractData(
                     this.convertToArray(), 
-                    OsdStartingCodes[key].values[i], 
-                    OsdStartingCodes[key].add
+                    OSD_BYTE_CODES[key].values[i], 
+                    OSD_BYTE_CODES[key].add
                 );
             }
 

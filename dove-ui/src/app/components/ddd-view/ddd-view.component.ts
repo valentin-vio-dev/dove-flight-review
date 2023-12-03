@@ -23,9 +23,9 @@ export class DddViewComponent implements OnInit, AfterViewInit, OnChanges {
   @ViewChild('canvas') canvas: ElementRef;
   @ViewChild('canvasContainer') canvasContainer: ElementRef;
 
-  @Input() osdData: any;
+  @Input() osdData: any[];
+  @Input() osdStats: any;
   @Input() sliderPosition: number;
-  @Input() videoLastModified: number;
 
   scene: THREE.Scene;
   camera: THREE.PerspectiveCamera;
@@ -86,8 +86,8 @@ export class DddViewComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   onOsdData() {
-    const xLen = this.osdData['stats']['x']['max'] - this.osdData['stats']['x']['min'];
-    const yLen = this.osdData['stats']['y']['max'] - this.osdData['stats']['y']['min'];
+    const xLen = this.osdStats['x']['max'] - this.osdStats['x']['min'];
+    const yLen = this.osdStats['y']['max'] - this.osdStats['y']['min'];
     this.maxAllSize = Math.max(xLen, yLen);
     
     // Remove inital grid
@@ -100,7 +100,7 @@ export class DddViewComponent implements OnInit, AfterViewInit, OnChanges {
     this.grid.rotateX(this.degreesToRadians(90));
     this.scene.add(this.grid); 
 
-    this.boxHeight = this.osdData['stats']['z']['max'] - this.osdData['stats']['z']['min'];
+    this.boxHeight = this.osdStats['z']['max'] - this.osdStats['z']['min'];
     const geometry = new THREE.BoxGeometry(this.maxAllSize * 2, this.maxAllSize * 2, this.boxHeight); 
     const mesh = new THREE.Mesh(geometry, new THREE.MeshNormalMaterial());
     mesh.position.z = this.boxHeight / 2;
@@ -163,9 +163,9 @@ export class DddViewComponent implements OnInit, AfterViewInit, OnChanges {
 
   getCurrentPosition() {
     return { 
-      x: this.osdData['data'][this.sliderPosition]['x'], 
-      y: this.osdData['data'][this.sliderPosition]['y'], 
-      z: this.osdData['data'][this.sliderPosition]['z']
+      x: this.osdData[this.sliderPosition]['x'], 
+      y: this.osdData[this.sliderPosition]['y'], 
+      z: this.osdData[this.sliderPosition]['z']
     };
   }
 
@@ -178,11 +178,11 @@ export class DddViewComponent implements OnInit, AfterViewInit, OnChanges {
       this.drone.position.y = currentPosition.y;
       this.drone.position.z = currentPosition.z;
 
-      if (this.sliderPosition < this.osdData['data'].length - 2) {
+      if (this.sliderPosition < this.osdData.length - 2) {
         const nextPosition = { 
-          x: this.osdData['data'][this.sliderPosition + 1]['x'],
-          y: this.osdData['data'][this.sliderPosition + 1]['y'],
-          z: this.osdData['data'][this.sliderPosition + 1]['z']
+          x: this.osdData[this.sliderPosition + 1]['x'],
+          y: this.osdData[this.sliderPosition + 1]['y'],
+          z: this.osdData[this.sliderPosition + 1]['z']
         };
         this.drone.lookAt(new THREE.Vector3(nextPosition.x, nextPosition.y, nextPosition.z));
       }
@@ -261,18 +261,18 @@ export class DddViewComponent implements OnInit, AfterViewInit, OnChanges {
       const color = new THREE.Color();
 
       for (let i = 0; i <= this.sliderPosition - 1; i++) {
-        if (!this.osdData['data'][this.sliderPosition - i]) {
+        if (!this.osdData[this.sliderPosition - i]) {
           break;
         }
   
         const p1 = { 
-          x: this.osdData['data'][this.sliderPosition - i]['x'],
-          y: this.osdData['data'][this.sliderPosition - i]['y'],
-          z: this.osdData['data'][this.sliderPosition - i]['z']
+          x: this.osdData[this.sliderPosition - i]['x'],
+          y: this.osdData[this.sliderPosition - i]['y'],
+          z: this.osdData[this.sliderPosition - i]['z']
         };
 
-        const speed = this.osdData['data'][this.sliderPosition - i]['speed'];
-        const speedPercentage = speed / this.osdData['stats']['speed']['max'];
+        const speed = this.osdData[this.sliderPosition - i]['speed'];
+        const speedPercentage = speed / this.osdStats['speed']['max'];
         points.push(p1.x, p1.y, p1.z);
         color.setHSL((1 - speedPercentage) * 0.333, 1.0, 0.5, THREE.SRGBColorSpace);
         colors.push(color.r, color.g, color.b);
@@ -300,14 +300,14 @@ export class DddViewComponent implements OnInit, AfterViewInit, OnChanges {
     const colors: number[] = [];
     const color = new THREE.Color();
 
-    for (let i = 0; i <= this.osdData['data'].length; i++) {
-      if (!this.osdData['data'][i]) {
+    for (let i = 0; i <= this.osdData.length; i++) {
+      if (!this.osdData[i]) {
         break;
       }
       const p1 = { 
-        x: this.osdData['data'][i]['x'], 
-        y: this.osdData['data'][i]['y'], 
-        z: this.osdData['data'][i]['z']
+        x: this.osdData[i]['x'], 
+        y: this.osdData[i]['y'], 
+        z: this.osdData[i]['z']
       };
       
       points.push(p1.x, p1.y, p1.z);
