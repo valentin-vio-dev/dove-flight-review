@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "osd_viewer": {
+    "dove_app": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/osd_viewer",
+            "outputPath": "dist/dove_app",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -74,10 +74,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "osd_viewer:build:production"
+              "browserTarget": "dove_app:build:production"
             },
             "development": {
-              "browserTarget": "osd_viewer:build:development"
+              "browserTarget": "dove_app:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -85,7 +85,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "osd_viewer:build"
+            "browserTarget": "dove_app:build"
           }
         },
         "test": {
