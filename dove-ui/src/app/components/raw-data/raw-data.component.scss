@@ -2,6 +2,9 @@
 
 .list {
     padding: 32px;
+    position: absolute;
+    width: 100%;
+    box-sizing: border-box;
 
     .row {
         display: flex;
@@ -19,6 +22,13 @@
             color: mat-color($color-primary);
         }
     }
+}
+
+.container {
+    height: 100%;
+    width: 100%;
+    overflow-y: auto;
+    position: relative;
 }
 
 app-warning-text {

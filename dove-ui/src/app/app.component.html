@@ -10,16 +10,16 @@
 </mat-toolbar>
 
 <div class="content">
-  <div class="map view">
+  <div class="map">
     <app-map [osdFrames]="osdFrames" [osdStats]="osdStats" [sliderPosition]="sliderPosition"></app-map>
   </div>
-  <div class="video view">
+  <div class="video">
     <app-video [osdFrames]="osdFrames" [sliderPosition]="sliderPosition" [videoFileName]="videoFileName"></app-video>
   </div>
-  <div class="ddd-player view">
+  <div class="ddd-player">
     <app-ddd-view [osdFrames]="osdFrames" [osdStats]="osdStats" [sliderPosition]="sliderPosition"></app-ddd-view>
   </div>
-  <div class="raw-data view">
+  <div class="raw-data">
     <app-raw-data [osdFrames]="osdFrames" [sliderPosition]="sliderPosition"></app-raw-data>
   </div>
 </div>
