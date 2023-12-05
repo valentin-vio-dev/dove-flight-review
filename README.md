@@ -1,20 +1,29 @@
 # Dove 🕊️ a flight review application
 
-Dove is an open-source application based on [wtfOS](https://github.com/fpv-wtf/wtfos) OSD data, that lets review your drone flight on a map, even in a 3D space along with your OSD video. Currently Dove can only be used as a locally hosted web application but later a standalone desktop application will be made.
+Dove is an open-source application based on [wtfOS](https://github.com/fpv-wtf/wtfos) OSD data, that lets review your drone flight on a map, even in a 3D space along with your OSD video.
 
 ![](docs/preview.png)
 
 
 ## Setup and usage
 
-##### User interface (Angular)
+#### a, Desktop application
+https://github.com/valentin-vio-dev/dove-flight-review/releases/tag/v1.0.0
+
+```
+Extract the .zip file and open Dove.exe 
+```
+
+#### b, Locally hosted
+
+##### User interface
 ```
 cd dove-ui
 npm i
 ng serve
 ```
 
-##### Backend (Node.js)
+##### Backend
 ```
 cd dove-api
 npm i
