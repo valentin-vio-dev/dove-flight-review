@@ -2,6 +2,7 @@ import { Express } from 'express';
 import cors from 'cors';
 import busboy from 'connect-busboy';
 import fs from 'fs-extra';
+import { Server } from 'http';
 
 import videoRouter from './routes/video.routes';
 import osdRouter from './routes/osd.routes';
@@ -9,7 +10,8 @@ import { UPLOADS_DIRECTORY } from './settings/settings.const';
 
 export class Application {
     app: Express;
-    port: number
+    server: Server | undefined;
+    port: number;
 
     constructor(app: Express, port: number | string = 3000) {
         this.app = app;
@@ -22,9 +24,15 @@ export class Application {
     }
 
     start() {
-        this.app.listen(this.port, () => {
+        this.server = this.app.listen(this.port, () => {
             console.log(`Server running at http://localhost:${this.port}`);
         });
+    }
+
+    stop() {
+        if (this.server) {
+            this.server.close();
+        }
     }
 
     setRoutes() {
