@@ -143,9 +143,9 @@ export class DddViewComponent implements OnInit, AfterViewInit, OnChanges {
     this.renderer.render(this.scene, this.camera);
   }
 
-  async setInitialObjects() {
-    this.drone = await this.loadModel('assets/drone.obj');
-    this.drone.scale.setScalar(METER_IN_PIXEL * 0.3);
+  setInitialObjects() {
+    this.drone = this.loadModel();
+    this.drone.scale.setScalar(METER_IN_PIXEL * 0.3 * 0.2);
     this.scene.add(this.drone);
 
     this.camera.position.y = this.maxAllSize * 1.5;
@@ -325,14 +325,9 @@ export class DddViewComponent implements OnInit, AfterViewInit, OnChanges {
     this.scene.add(fullPath);
   }
 
-  loadModel(modelPath: string): any {
-    const loader = new OBJLoader();
-    return new Promise((resolve, reject) => {
-      loader.load(modelPath,
-        (object) => { resolve(object) },
-        (xhr) => {},
-        (error) => { reject(error) }
-      );
-    });
+  loadModel(): any {
+    const geometry = new THREE.SphereGeometry(1, 32, 16); 
+    const material = new THREE.MeshBasicMaterial( { color: 0x0cd16b } ); 
+    return new THREE.Mesh(geometry, material);
   }
 }

@@ -17,3 +17,15 @@ body {
 mat-toolbar-row, .mdc-button {
   font-weight: normal;
 }
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #00000033;
+}
+ 
+::-webkit-scrollbar-thumb {
+  background: mat-color($color-primary); 
+}
